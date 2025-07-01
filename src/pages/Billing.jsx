@@ -39,7 +39,8 @@ export default function Billing() {
             .join(', ')}, and the current month is ${current.total_amount}. What could be the reason for the hike in the latest bill?`;
 
           try {
-            const response = await fetch('http://localhost:5000/api/chat', {
+            const response = await fetch('fetch('https://ticket-api-service.azurewebsites.net/api/chat') // ✅ correct
+', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
