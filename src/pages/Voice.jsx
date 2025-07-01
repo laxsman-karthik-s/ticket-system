@@ -50,9 +50,11 @@ ETA: <number>
 
 Complaint: ${inputText}`;
 
-      const response = await axios.post('https://ticket-api-service-d4hfacdgf4c9h5g5.southeastasia-01.azurewebsites.net/api/chat', {
-        prompt: formattedPrompt,
-      });
+      const response = await axios.post(
+        'https://ticket-api-service-d4hfacdgf4c9h5g5.southeastasia-01.azurewebsites.net/api/chat',
+        { prompt: formattedPrompt },
+        { withCredentials: true } // ✅ Important for Supabase Auth cookies
+      );
 
       const result = response.data.choices[0].message.content.trim();
 
@@ -145,29 +147,19 @@ Complaint: ${inputText}`;
           >
             <h3 className="fw-bold mb-4 text-primary">🎙 Submit a Voice Complaint</h3>
 
-            {/* Start/Stop Buttons */}
             <div className="row g-3 mb-4">
               <div className="col-md-6">
-                <button
-                  className="btn btn-success w-100"
-                  onClick={startRecording}
-                  disabled={recording}
-                >
+                <button className="btn btn-success w-100" onClick={startRecording} disabled={recording}>
                   <i className="bi bi-mic-fill me-2"></i> Start Recording
                 </button>
               </div>
               <div className="col-md-6">
-                <button
-                  className="btn btn-danger w-100"
-                  onClick={stopRecording}
-                  disabled={!recording}
-                >
+                <button className="btn btn-danger w-100" onClick={stopRecording} disabled={!recording}>
                   <i className="bi bi-stop-fill me-2"></i> Stop
                 </button>
               </div>
             </div>
 
-            {/* Voice Transcript (Full Width) */}
             <div className="mb-4">
               <label htmlFor="transcript" className="form-label fw-semibold text-muted">
                 Voice Transcript
@@ -183,7 +175,6 @@ Complaint: ${inputText}`;
               />
             </div>
 
-            {/* Complaint Summary */}
             {subject && (
               <div className="bg-light border rounded p-3 mb-4">
                 <h5 className="fw-semibold mb-3 text-dark">📄 Complaint Summary</h5>
@@ -195,7 +186,6 @@ Complaint: ${inputText}`;
               </div>
             )}
 
-            {/* Submit Button */}
             <div className="text-center mt-4">
               <button
                 className="fw-semibold px-5 py-2 border-0"
