@@ -42,6 +42,7 @@ export default function Billing() {
             const response = await fetch('https://ticket-api-service-d4hfacdgf4c9h5g5.southeastasia-01.azurewebsites.net/api/chat', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
               body: JSON.stringify({
                 messages: [
                   {
