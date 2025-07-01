@@ -17,7 +17,7 @@ app.post('/api/chat', async (req, res) => {
       ? messages
       : [
           { role: 'system', content: 'You are a helpful assistant.' },
-          { role: 'user', content: prompt || 'No prompt provided.' } // ✅ This line ensures valid input
+          { role: 'user', content: prompt || 'No prompt provided.' }
         ];
 
     const response = await chatWithOpenAI(userPrompt);
@@ -28,6 +28,9 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log(`🚀 Server running on http://localhost:5000`);
+// ✅ Use dynamic port for Azure compatibility
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
