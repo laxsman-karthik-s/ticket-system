@@ -20,7 +20,7 @@ app.use(cors({
   },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: false // Change to true only if cookies are needed
+  credentials: true // Change to true only if cookies are needed
 }));
 
 // ✅ Handle preflight OPTIONS requests
