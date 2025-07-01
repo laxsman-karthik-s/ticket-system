@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 // ✅ Define allowed frontend origins (your Azure Static Web App URL)
-const allowedOrigins = ['https://brave-tree-0754a7700.2.azurestaticapps.net'];
+const allowedOrigins = ['https://polite-ocean-0d1922b00.2.azurestaticapps.net'];
 
 app.use(cors({
   origin: function (origin, callback) {
