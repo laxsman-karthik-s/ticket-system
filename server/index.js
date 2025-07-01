@@ -6,7 +6,25 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// ✅ Define allowed frontend origins (your Azure Static Web App URL)
+const allowedOrigins = ['https://brave-tree-0754a7700.2.azurestaticapps.net'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.post('/api/chat', async (req, res) => {
